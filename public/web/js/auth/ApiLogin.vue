@@ -1,10 +1,10 @@
 <template>
-$END$
+
 </template>
 
 <script>
 export default {
-name: "ApiLogin"
+    name: "ApiLogin"
 }
 </script>
 

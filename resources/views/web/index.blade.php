@@ -752,7 +752,7 @@
     createApp({
         methods: {
             shownumber() {
-                console.log(123);
+                console.log('sdfsfsdfsdf');
             }
         },
     }).mount('#sticker')

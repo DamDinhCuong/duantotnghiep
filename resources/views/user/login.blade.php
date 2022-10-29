@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="{{asset('css/login/index.css')}}" />
+    <link rel="stylesheet" href="{{asset('web/css/auth/login.css')}}" />
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -34,10 +34,10 @@
                 <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
             </div>
             <span>or use your account</span>
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Password" />
+            <input type="text" v-model="username" placeholder="Email" />
+            <input type="password" v-model="password"placeholder="Password" />
             <a href="#">Forgot your password?</a>
-            <button>Sign In</button>
+            <button><a> @click="signIn()" </a>Sign In</button>
         </form>
     </div>
     <div class="overlay-container">
@@ -57,4 +57,33 @@
 </div>
 </body>
 </html>
-<script src="{{asset('/js/login/login.js')}}"></script>
+<script src="{{asset('web/js/auth/login.js')}}"></script>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script>
+    import  axios  from "axios"
+    export default {
+        data ()
+        {
+            return{
+                username:"",
+                password:""
+            }
+        },
+        method: {
+            async signIn()
+            {
+                let result = await axios.post("52.20.194.189:8080/api/account/login",{
+                    username:this.username,
+                    password:this.password,
+                });
+
+                console.warn(result);
+                if(result.status==201)
+                {
+                    alert("thành công rồi");
+                }
+            }
+        }
+    }
+</script>
+
