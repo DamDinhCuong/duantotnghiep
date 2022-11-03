@@ -37,7 +37,7 @@
             <input type="text" v-model="username" placeholder="Email" />
             <input type="password" v-model="password"placeholder="Password" />
             <a href="#">Forgot your password?</a>
-            <button><a> @click="signIn()" </a>Sign In</button>
+            <button><a></a>Sign In</button>
         </form>
     </div>
     <div class="overlay-container">
