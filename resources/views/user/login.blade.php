@@ -71,14 +71,9 @@
         data() {
             return {
                 user: {
-                    email: '',
+                    username:'',
                     password: '',
-                    username: "",
-                    passwor: "",
-                    email: "",
-                    date_of_birth: "",
-                    full_name: "",
-                    phone: ""
+
                 }
             }
         },
