@@ -50,9 +50,7 @@
                 <div class="product-filters">
                     <ul>
                         <li class="active" data-filter="*">All</li>
-                        <li data-filter=".strawberry">Strawberry</li>
-                        <li data-filter=".berry">Berry</li>
-                        <li data-filter=".lemon">Lemon</li>
+                        <li v-for="category of categories" v-text="category.categoryName"></li>
                     </ul>
                 </div>
             </div>
@@ -137,29 +135,40 @@
             size:6,
             totalPage:0,
             products: [],
+            categories: [],
             errors: []
             }
         },
-        mounted() {
-            axios
-                .get('https://watchshop-doan.herokuapp.com/api/product/free/get-all/'+this.page+'/'+this.size)
-                .then(response => {
+        created() {
+            axios.get('https://watchshop-doan.herokuapp.com/api/product/free/get-all/'+this.page+'/'+this.size)
+                .then(response => {                    
                     console.log(response);
                     this.page=1;
                     this.totalPage=response.data.totalPage;
                     this.products=response.data.data;
+                    
                 })
-                .catch(e => {
-                    this.errors.push(e)
-                })
-        },
+                axios.get('http://watchshop-doan.herokuapp.com/api/categories/free/get-all/1/100')
+                        .then(response => {
+                            console.log("categories:",response);
+                            this.categories=response.data;
+                            console.log("this.categories:",this.categories);
+                        })
+            },
         methods: {
             next() {
                 if(this.page < this.totalPage){
                     this.page+=1;
                 }else{
                     this.page=1;
-                }            
+                }  
+                axios
+                .get('http://watchshop-doan.herokuapp.com/api/product/free/get-all/'+this.page+'/'+this.size)
+                .then(response => {
+                    console.log(response);
+                    this.totalPage=response.data.totalPage;
+                    this.products=response.data.data;
+                })                   
             },
             previous() {
                 if(this.page > 0){
@@ -167,7 +176,13 @@
                 }else{
                     this.page=this.totalPage;
                 }
-                
+                axios
+                .get('https://watchshop-doan.herokuapp.com/api/product/free/get-all/'+this.page+'/'+this.size)
+                .then(response => {
+                    console.log(response);
+                    this.totalPage=response.data.totalPage;
+                    this.products=response.data.data;
+                })                
             }
         },
     }).mount('#app')
