@@ -242,10 +242,43 @@
                             <li><a href="">Dịch vụ</a></li>
                             <li><a href="">Liên hệ</a></li>
                             <li>
-                                <div class="header-icons">
+                                <!-- <div class="header-icons">
                                     <a class="shopping-cart" href="{{route('cart')}}"><i class="fas fa-shopping-cart"></i></a>
                                     <a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
                                     <a class="user" href="{{route('login')}}"><i class="far fa-user"></i></a>
+                                </div> -->
+                                <div class="header-icons">
+                                    <a class="shopping-cart" href="{{route('cart')}}">
+                                        <i class="fas fa-shopping-cart checkout" aria-hidden="true"></i>
+                                        <span id="checkout_items"
+                                              class="checkout_items">2</span>
+                                    </a>
+                                    <a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+                                    <div class="dropdown dropdownCustom">
+                                        <div class="dropdown-toggle customUser" id="dropdownMenuButton"
+                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
+                                            <i class="far fa-user">
+                                                Xin chào, username</i>
+                                        </div>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item dropdownCustom" href="#">Thông tin</a>
+                                            <a class="dropdown-item dropdownCustom" href="#">Đổi mật
+                                                khẩu</a>
+                                            <a class="dropdown-item dropdownCustom" href="#">Đăng xuất</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="dropdown dropdownCustom">
+                                        <div class="dropdown-toggle customUser" id="dropdownMenuButton"
+                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                             href="#">
+                                            <i class="far fa-user"></i>
+                                        </div>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item dropdownCustom" href="{{route('login')}}">Đăng nhập</a>
+                                            <a class="dropdown-item dropdownCustom" href="#">Đăng ký</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </li>
                         </ul>

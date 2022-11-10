@@ -27,6 +27,8 @@
     <link rel="stylesheet" type="text/css" href="{{asset('web/css/main.css')}}">
     <!-- responsive -->
     <link rel="stylesheet" type="text/css" href="{{asset('web/css/responsive.css')}}">
+
+    <link rel="stylesheet" type="text/css" href="{{asset('web/custom/css/menu_custom.css')}}">
     @yield('styles')
 </head>
 
@@ -40,10 +42,8 @@
 <!-- end copyright -->
 <!-- jquery -->
 <script src="{{asset('web/js/jquery-1.11.3.min.js')}}"></script>
-<!-- jquery -->
-<script src="{{asset('web/js/jquery-1.11.3.min.js')}}"></script>
 <!-- bootstrap -->
-<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script> -->
+<script src="{{asset('web/bootstrap/js/bootstrap.min.js')}}"></script>
 <!-- count down -->
 <script src="{{asset('web/js/jquery.countdown.js')}}"></script>
 <!-- isotope -->
@@ -63,6 +63,11 @@
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js" integrity="sha512-xIPqqrfvUAc/Cspuj7Bq0UtHNo/5qkdyngx6Vwt+tmbvTLDszzXM0G6c91LXmGrRx8KEPulT+AfOOez+TeVylg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.3/axios.min.js"></script>
+
+<!-- fly to cart -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<script src="{{asset('web/fly_to_cart/js/flyto.min.js')}}"></script>
+<script src="{{asset('web/custom/js/shop_custom.js')}}"></script>
 @yield('script')
 @yield('vue')
 </html>
