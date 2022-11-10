@@ -27,24 +27,45 @@
 <!-- end search area -->
 
 <!-- hero area -->
-<div class="hero-area hero-bg">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 offset-lg-2 text-center">
-                <div class="hero-text">
-                    <div class="hero-text-tablecell">
-                        <p class="subtitle">Fresh & Organic</p>
-                        <h1>Delicious Seasonal Fruits</h1>
-                        <div class="hero-btns">
-                            <a @click="shop()" class="boxed-btn">Fruit Collection</a>
-                            <a href="{{route('contact')}}" class="bordered-btn">Contact Us</a>
+<header class="header header-db position-relative">
+    <section class="text-header w-100 position-absolute wow animate__slideInLeft">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 offset-lg-2 text-center">
+                    <div class="hero-text">
+                        <div class="hero-text-tablecell">
+                            <p class="subtitle">Fresh & Organic</p>
+                            <h1>Delicious Seasonal Fruits</h1>
+                            <div class="hero-btns">
+                                <a @click="login123()" class="boxed-btn">Fruit Collection</a>
+                                <a href="{{route('contact')}}" class="bordered-btn">Contact Us</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    </section>
+    <ul class="hero__img_list">
+        <li class="hero__img_item">
+            <img class="sp-hidden" src="{{ asset('images/bg-header/bg-2.png') }}" alt="">
+        </li>
+        <li class="hero__img_item">
+            <img class="sp-hidden" src="{{ asset('images/bg-header/bg-1.png') }}" alt="">
+        </li>
+        <li class="hero__img_item">
+            <img class="sp-hidden" src="{{ asset('images/bg-header/bg-3.png') }}" alt="">
+        </li>
+        <li class="hero__img_item">
+            <img class="sp-hidden" src="{{ asset('images/bg-header/bg-4.png') }}" alt="">
+        </li>
+        <li class="hero__img_item">
+            <img class="sp-hidden" src="{{ asset('images/bg-header/bg-5.png') }}" alt="">
+        </li>
+
+    </ul>
+    <div class="gradient w-100 h-50 position-absolute"></div>
+</header>
 <!-- end hero area -->
 
 <!-- features list section -->
@@ -363,46 +384,55 @@
 </div>
 <!-- end latest news -->
 
-<!-- logo carousel -->
-<div class="logo-carousel-section">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="logo-carousel-inner">
-                    <div class="single-logo-item">
-                        <img src="{{ asset('images/company-logos/1.png')}}" alt="">
-                    </div>
-                    <div class="single-logo-item">
-                        <img src="{{ asset('images/company-logos/2.png')}}" alt="">
-                    </div>
-                    <div class="single-logo-item">
-                        <img src="{{ asset('images/company-logos/3.png')}}" alt="">
-                    </div>
-                    <div class="single-logo-item">
-                        <img src="{{ asset('images/company-logos/4.png')}}" alt="">
-                    </div>
-                    <div class="single-logo-item">
-                        <img src="{{ asset('images/company-logos/5.png')}}" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- end logo carousel -->
+
 @endsection
 
 @section('vue')
 <script>
-    const {createApp} = Vue
+    const {
+        createApp
+    } = Vue
     createApp({
+        mounted() {
+            axios
+                .get('http://watchshop-doan.herokuapp.com/api/product/free/get-all/1/10', {
+                    "page" :1,
+                    "size": 5
+                })
+                .then(response => {console.log(response)})
+        },
         methods: {
             shownumber() {
                 console.log(123);
             },
-            shop() {
-                console.log(123);
-            }
+            login123() {
+                axios
+                    .get('http://52.20.194.189:8080/api/admin/warehouse/get-all-product?page=1&size=5', {
+                        headers: {
+                            'X-Content-Type-Options': 'nosniff',
+                            'X-XSS-Protection': '1; mode=block',
+                            'Cache-Control': 'no-cache, no-store, max-age=0, must-revalidate',
+                            'Pragma': 'no-cache',
+                            'Expires': '0',
+                            'X-Frame-Options': 'DENY',
+                            'Content-Type': 'application/json',
+                            'Transfer-Encoding': 'chunked',
+                            'Date': 'Sat, 05 Nov 2022 08:33:59 GMT',
+                            'Keep-Alive': 'timeout=60',
+                            'Connection': 'keep-alive',
+                        }
+                        // "username": this.username,
+                        // "password": this.passwor
+                        // headers: {
+                        //     'lang': 'en',
+                        //     'versioncode': '11',
+                        //     'clienttype': 'ios_jike_default'
+                        // }
+                    })
+                    .then(response => (
+                        console.log(response)
+                    )).catch(error => console.log(error))
+            },
         },
     }).mount('#app')
 </script>

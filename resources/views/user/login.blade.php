@@ -35,7 +35,7 @@
                     <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
                 </div>
                 <span>or use your account</span>
-                <input type="text" v-model="user.email" placeholder="Email" />
+                <input type="text" v-model="user.username" placeholder="Email" />
                 <input type="password" v-model="user.password" placeholder="Password" />
                 <a href="#">Forgot your password?</a>
                 <button @click="login()">Sign In</button>
@@ -74,7 +74,6 @@
                     email: '',
                     password: '',
                     username: "",
-                    passwor: "",
                     email: "",
                     date_of_birth: "",
                     full_name: "",
@@ -89,22 +88,22 @@
         methods: {
             login() {
                 axios
-                    .post('52.20.194.189:8080/api/account/login', {
+                    .post('http://52.20.194.189:8080/api/account/login', {
                         // headers: {
                         //     'lang': 'en',
                         //     'versioncode': '11',
                         //     'clienttype': 'ios_jike_default'
                         // }
-                        // "username": this.username,
-                        // "password": this.passwor
+                        "username": this.username,
+                        "password": this.password
                     })
-                    .then(response => (
+                    .then(response => {
                         console.log(response)
-                    )).catch(error => console.log(error))
+            }).catch(error => console.log(error))
             },
             register() {
                 axios
-                    .post('52.20.194.189:8080/api/account/create-account', {
+                    .get('52.20.194.189:8080/api/account/create-account', {
                         "username": "hainh_55",
                         "password": "111",
                         "email": "nguyenh3nghai050272@gmail.com",
