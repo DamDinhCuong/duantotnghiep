@@ -35,8 +35,8 @@
                     <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
                 </div>
                 <span>or use your account</span>
-                <input type="text" v-model="user.username" placeholder="Email" />
-                <input type="password" v-model="user.password" placeholder="Password" />
+                <input type="text" v-model="username" @keyup.enter="login()" placeholder="Username" />
+                <input type="password" v-model="password" @keyup.enter="login()" placeholder="Password" />
                 <a href="#">Forgot your password?</a>
                 <button @click="login()">Sign In</button>
             </form>
@@ -70,10 +70,10 @@
 
         data() {
             return {
-                user: {
-                    username:'',
-                    password: '',
-                }
+                username:'',
+                password: '',
+                token:'',
+                postBody:{}
             }
         },
         created: function() {},
@@ -82,19 +82,14 @@
         },
         methods: {
             login() {
-                axios
-                    .post('http://52.20.194.189:8080/api/account/login', {
-                        // headers: {
-                        //     'lang': 'en',
-                        //     'versioncode': '11',
-                        //     'clienttype': 'ios_jike_default'
-                        // }
-                        "username": this.username,
-                        "password": this.password
-                    })
-                    .then(response => {
-                        console.log(response)
-            }).catch(error => console.log(error))
+                this.postBody.username=this.username;
+                this.postBody.password=this.password;
+                console.log("body",this.postBody);
+                axios.post('http://watchshop-doan.herokuapp.com/api/account/login',this.postBody)
+                .then(response => {      
+                    this.token=response.data.data.access_token;
+                    console.log(this.token)                                    
+                })
             },
             register() {
                 axios
