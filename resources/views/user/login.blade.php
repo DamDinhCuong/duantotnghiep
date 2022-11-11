@@ -37,7 +37,7 @@
             <input type="text" v-model="username" placeholder="Email" />
             <input type="password" v-model="password"placeholder="Password" />
             <a href="#">Forgot your password?</a>
-            <button><a></a>Sign In</button>
+            <button @click="login()">Sign In</button>
         </form>
     </div>
     <div class="overlay-container">
@@ -60,30 +60,56 @@
 <script src="{{asset('web/js/auth/login.js')}}"></script>
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 <script>
-    import  axios  from "axios"
-    export default {
-        data ()
-        {
-            return{
-                username:"",
-                password:""
-            }
-        },
-        method: {
-            async signIn()
-            {
-                let result = await axios.post("52.20.194.189:8080/api/account/login",{
-                    username:this.username,
-                    password:this.password,
-                });
-
-                console.warn(result);
-                if(result.status==201)
-                {
-                    alert("thành công rồi");
+    const {
+        createApp
+    } = Vue
+    createApp({
+        data() {
+            return {
+                user: {
+                    // email: '',
+                    password: '',
+                    username: "",
+                    // passwor: "",
+                    // date_of_birth: "",
+                    // full_name: "",
+                    // phone: ""
                 }
             }
+        },
+        created: function() {},
+        mounted: function() {
+        },
+        methods: {
+            login() {
+                axios
+                    .post('52.20.194.189:8080/api/account/login', {
+                        headers: {
+                            'lang': 'en',
+                            'versioncode': '11',
+                            'clienttype': 'ios_jike_default'
+                        },
+                        "username": this.username,
+                        "password": this.password
+                    })
+                    .then(response => (
+                        console.log(response)
+                    )).catch(error => console.log(error))
+            },
+            register() {
+                axios
+                    .post('52.20.194.189:8080/api/account/create-account', {
+                        "username": "hainh_55",
+                        "password": "111",
+                        "email": "nguyenh3nghai050272@gmail.com",
+                        "date_of_birth": "05/07/2002",
+                        "full_name": "Nguyễn Hoàng Hải",
+                        "phone": "0354243285"
+                    }).then(response => (
+                    console.log(this.email)
+                )).catch(error => console.log(error))
+            },
         }
-    }
+    }).mount('#container')
 </script>
 
