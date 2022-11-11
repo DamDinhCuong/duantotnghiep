@@ -136,24 +136,35 @@
             totalPage:0,
             products: [],
             categories: [],
+            user:'',
             errors: []
             }
         },
         created() {
-            axios.get('https://watchshop-doan.herokuapp.com/api/product/free/get-all/'+this.page+'/'+this.size)
-                .then(response => {                    
-                    console.log(response);
-                    this.page=1;
-                    this.totalPage=response.data.totalPage;
-                    this.products=response.data.data;
-                    
-                })
+            console.log("localStorage",JSON.parse(localStorage.getItem('user')));
+            const userLogin=JSON.parse(localStorage.getItem('user'));
+            if(userLogin){
+                this.user=userLogin.username;
+                // axios.post('http://watchshop-doan.herokuapp.com/api/account/get-all-account?key_search='+userLogin.username,{
+                //     headers:{
+                //         Authorization:"Bearer "+userLogin.token
+                //     }
+                // }).then(response => {    
+                //     console.log(response);                                         
+                // })
+            }else{
+                this.user='';
+            }
+            axios.all([
+                axios.get('https://watchshop-doan.herokuapp.com/api/product/free/get-all/'+this.page+'/'+this.size),
                 axios.get('http://watchshop-doan.herokuapp.com/api/categories/free/get-all/1/100')
-                        .then(response => {
-                            console.log("categories:",response);
-                            this.categories=response.data;
-                            console.log("this.categories:",this.categories);
-                        })
+            ]).then(axios.spread((data1, data2) => {
+                // output of req.
+                    console.log('data1', data1, 'data2', data2);
+                    this.totalPage=data1.data.totalPage;
+                    this.products=data1.data.data;
+                    this.categories=data2.data;
+                }));
             },
         methods: {
             next() {
@@ -177,7 +188,7 @@
                     this.page=this.totalPage;
                 }
                 axios
-                .get('https://watchshop-doan.herokuapp.com/api/product/free/get-all/'+this.page+'/'+this.size)
+                .get('http://watchshop-doan.herokuapp.com/api/product/free/get-all/'+this.page+'/'+this.size)
                 .then(response => {
                     console.log(response);
                     this.totalPage=response.data.totalPage;

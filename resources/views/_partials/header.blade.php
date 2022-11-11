@@ -254,10 +254,10 @@
                                               class="checkout_items">2</span>
                                     </a>
                                     <a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
-                                    <div class="dropdown dropdownCustom">
+                                    <div v-if="user!=''" class="dropdown dropdownCustom">
                                         <div class="dropdown-toggle customUser" id="dropdownMenuButton"
                                              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
-                                            <i class="far fa-user">
+                                            <i class="far fa-user" v-text="'Xin chào, '+user">
                                                 Xin chào, username</i>
                                         </div>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -268,7 +268,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="dropdown dropdownCustom">
+                                    <div v-if="user==''" class="dropdown dropdownCustom">
                                         <div class="dropdown-toggle customUser" id="dropdownMenuButton"
                                              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                                              href="#">
