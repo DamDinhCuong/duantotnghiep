@@ -37,7 +37,7 @@
                 <span>or use your account</span>
                 <input type="text" v-model="username" @keyup.enter="login()" placeholder="Username" />
                 <input type="password" v-model="password" @keyup.enter="login()" placeholder="Password" />
-                <a href="#">Forgot your password?</a>
+                <a>Forgot your password?</a>
                 <button @click="login()">Sign In</button>
             </form>
         </div>
@@ -85,11 +85,20 @@
                 this.postBody.username=this.username;
                 this.postBody.password=this.password;
                 console.log("body",this.postBody);
-                axios.post('http://watchshop-doan.herokuapp.com/api/account/login',this.postBody)
+                axios.post('https://watchshop-doan.herokuapp.com/api/account/login',this.postBody)
                 .then(response => {      
                     this.token=response.data.data.access_token;
-                    console.log(this.token)                                    
+                    console.log(this.token) 
+                    console.log(this.username)
+                    if(this.token!=null){
+                        let user={};
+                        user.token=this.token;
+                        user.username=this.username;                        
+                        localStorage.setItem('user',JSON.stringify(user));  
+                        console.log(JSON.parse(localStorage.getItem('user')));                                         
+                    }                                                                        
                 })
+                
             },
             register() {
                 axios
